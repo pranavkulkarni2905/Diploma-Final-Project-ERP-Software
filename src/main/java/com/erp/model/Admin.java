@@ -7,18 +7,19 @@ public class Admin {
 	private String admin_email;
 	private String admin_phone;
 	private String admin_password;
-	
+	private String profile_photo;
 	public Admin() {
 		
 	}
 	public Admin(String admin_name, String admin_username, String admin_email, String admin_phone,
-			String admin_password) {
+			String admin_password,String profile_photo) {
 		super();
 		this.admin_name = admin_name;
 		this.admin_username = admin_username;
 		this.admin_email = admin_email;
 		this.admin_phone = admin_phone;
 		this.admin_password = admin_password;
+		this.profile_photo=profile_photo;
 	}
 	public String getAdmin_name() {
 		return admin_name;
@@ -49,6 +50,12 @@ public class Admin {
 	}
 	public void setAdmin_password(String admin_password) {
 		this.admin_password = admin_password;
+	}
+	public String getProfile_photo() {
+		return profile_photo;
+	}
+	public void setProfile_photo(String profile_photo) {
+		this.profile_photo = profile_photo;
 	}
 	
 	

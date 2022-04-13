@@ -39,5 +39,28 @@ public class AdminDAO {
 		return adminObj;
 		
 	}
+	
+	public int addNewAdmin(String username,String email,String contact,String password) {
+		con=DBConnection.getConnection();
+		int i=0;
+		try {
+			ps=con.prepareStatement("insert into erp_admin (username,email,phone,password) values(?,?,?,?)");
+			ps.setString(1, username);
+			ps.setString(2, email);
+			ps.setString(3, contact);
+			ps.setString(4, password);
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+	
+	public void viewAllAdmin() {
+		con=DBConnection.getConnection();
+		ps=con.prepareStatement("select * from erp_admin");
+		
+	}
 
 }

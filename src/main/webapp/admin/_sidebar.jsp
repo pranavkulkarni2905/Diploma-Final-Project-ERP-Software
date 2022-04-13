@@ -113,7 +113,20 @@
        
         
        
+        <li class="navigation-header"><a class="navigation-header-text">Admin Section</a><i class="navigation-header-icon material-icons">more_horiz</i>
+        </li>
         
+        <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">Admin</span></a>
+          <div class="collapsible-body">
+            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+              <li><a href="add-admin.jsp"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
+              </li>
+              <li><a href="view-admin.jsp"><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
+              </li>
+              
+            </ul>
+          </div>
+        </li>
         
         <li class="navigation-header"><a class="navigation-header-text">Faculty Section</a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>

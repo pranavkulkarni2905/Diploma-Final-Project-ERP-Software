@@ -115,7 +115,8 @@ response.setDateHeader ("Expires", 0);
 			 <%try{
 			Boolean msg1 = (Boolean) session.getAttribute("admin-logout-msg");
 			if (msg1==true) {
-			%>
+		
+				%>
 				<div class="card-alert card green">
                 <div class="card-content white-text">
                    <p><i class="material-icons">check</i> Success: You Have Been Successfully Logged Out.</p>
@@ -137,14 +138,14 @@ response.setDateHeader ("Expires", 0);
       </div>
       <div class="row margin">
         <div class="input-field col s12">
-          <i class="materials-icons prefix pt-2" >person_outline</i>
+          <i class="material-icons prefix pt-2">person_outline</i>
           <input id="username" type="text" name="username">
           <label for="username" class="center-align">Username</label>
         </div>
       </div>
       <div class="row margin">
         <div class="input-field col s12">
-          <i class="materials-icons prefix pt-2" >lock_outline</i>
+          <i class="material-icons prefix pt-2">lock_outline</i>
           <input id="password" type="password" name="password" >
           <label for="password">Password</label>
         </div>
