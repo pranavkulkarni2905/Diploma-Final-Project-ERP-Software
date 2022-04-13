@@ -1,0 +1,29 @@
+SQL Tables
+----------------------------------------------
+1. Admin 
+
+create table erp_admin(
+id number primary key,
+name varchar2(2000),
+username varchar2(2000),
+email varchar2(2000),
+phone varchar2(2000),
+password varchar2(200),
+photo varchar2(3000),
+register_time varchar2(2000),
+logout_time varchar2(2000)
+);
+create sequence erp_admin_seq
+start with 1
+increment by 1;
+
+create or replace trigger erp_admin_trig
+before insert on erp_admin
+for each row
+begin
+select erp_admin_seq.nextval into :new.id from dual;
+end;
+=================================================
+
+
+
