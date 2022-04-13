@@ -46,6 +46,7 @@ public class AdminLoginServlet extends HttpServlet {
 			response.sendRedirect("admin/admin-login.jsp");
 		}
 		if(adObj!=null) {
+			sc.setAttribute("admin-id", adObj.getAdmin_id());
 			sc.setAttribute("admin-login-success-context", adObj);
 			session.setAttribute("admin-login-success", true);
 			response.sendRedirect("admin/admin-index.jsp");

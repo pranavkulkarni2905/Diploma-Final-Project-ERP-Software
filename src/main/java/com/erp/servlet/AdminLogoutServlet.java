@@ -1,6 +1,11 @@
 package com.erp.servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -9,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.erp.DAO.DBConnection;
 
 /**
  * Servlet implementation class AdminLogoutServlet
@@ -31,6 +38,27 @@ public class AdminLogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession ses = request.getSession();
 		ServletContext sc=request.getServletContext();
+		
+		
+		int id=(Integer)(sc.getAttribute("admin-id"));
+		System.out.println(id);
+		
+		
+		Connection con=null;
+		PreparedStatement ps=null;
+		Timestamp date=new Timestamp(new Date().getTime());
+
+		con=DBConnection.getConnection();
+		try {
+			ps=con.prepareStatement("update erp_admin set logout_time=? where id =?");
+			ps.setTimestamp(1, date);
+			ps.setInt(2, id);
+			int i=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		sc.removeAttribute("admin-login-success-context");
 		ses.removeAttribute("admin-login-success");
 
@@ -49,6 +77,7 @@ public class AdminLogoutServlet extends HttpServlet {
 	}
 
 	/**
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

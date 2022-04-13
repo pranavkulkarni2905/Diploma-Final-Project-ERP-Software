@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Timestamp;
+import java.util.Date;
 
 import com.erp.model.Admin;
 
@@ -25,6 +26,7 @@ public class AdminDAO {
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
 				adminObj=new Admin();
+				adminObj.setAdmin_id(rs.getInt(1));
 				adminObj.setAdmin_name(rs.getString(2));
 				adminObj.setAdmin_username(rs.getString(3));
 				adminObj.setAdmin_email(rs.getString(4));
@@ -42,13 +44,16 @@ public class AdminDAO {
 	
 	public int addNewAdmin(String username,String email,String contact,String password) {
 		con=DBConnection.getConnection();
+		Timestamp date=new Timestamp(new Date().getTime());
+
 		int i=0;
 		try {
-			ps=con.prepareStatement("insert into erp_admin (username,email,phone,password) values(?,?,?,?)");
+			ps=con.prepareStatement("insert into erp_admin (username,email,phone,password,register_time) values(?,?,?,?,?)");
 			ps.setString(1, username);
 			ps.setString(2, email);
 			ps.setString(3, contact);
 			ps.setString(4, password);
+			ps.setTimestamp(5, date);
 			i = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -57,10 +62,33 @@ public class AdminDAO {
 		return i;
 	}
 	
-	public void viewAllAdmin() {
+	public ResultSet viewAllAdmin() {
 		con=DBConnection.getConnection();
-		ps=con.prepareStatement("select * from erp_admin");
+		ResultSet rs=null;
+		try {
+			ps=con.prepareStatement("select * from erp_admin");
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 		
+	}
+	public ResultSet getSpecificAdminDataById(int id) {
+		//Admin a1=new Admin();
+		ResultSet rs=null;
+		con=DBConnection.getConnection();
+		try {
+			ps=con.prepareStatement("select * from erp_admin where id=?");
+			ps.setInt(1, id);
+			rs=ps.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 }

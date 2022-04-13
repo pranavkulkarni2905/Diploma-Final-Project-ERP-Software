@@ -2,6 +2,7 @@ package com.erp.model;
 
 public class Admin {
 
+	private int admin_id;
 	private String admin_name;
 	private String admin_username;
 	private String admin_email;
@@ -11,9 +12,10 @@ public class Admin {
 	public Admin() {
 		
 	}
-	public Admin(String admin_name, String admin_username, String admin_email, String admin_phone,
+	public Admin(int admin_id,String admin_name, String admin_username, String admin_email, String admin_phone,
 			String admin_password,String profile_photo) {
 		super();
+		this.admin_id=admin_id;
 		this.admin_name = admin_name;
 		this.admin_username = admin_username;
 		this.admin_email = admin_email;
@@ -56,6 +58,12 @@ public class Admin {
 	}
 	public void setProfile_photo(String profile_photo) {
 		this.profile_photo = profile_photo;
+	}
+	public int getAdmin_id() {
+		return admin_id;
+	}
+	public void setAdmin_id(int admin_id) {
+		this.admin_id = admin_id;
 	}
 	
 	
