@@ -1,3 +1,4 @@
+<%@page import="com.erp.model.Admin"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -28,7 +29,10 @@
   </head>
   <!-- END: Head-->
   <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-dark-menu" data-col="2-columns">
-
+<%
+ServletContext sc=request.getServletContext();
+Admin a1=(Admin)sc.getAttribute("admin-login-success-context");
+%>
     <!-- BEGIN: Header-->
     <header class="page-topbar" id="header">
       <div class="navbar navbar-fixed"> 
@@ -43,7 +47,21 @@
               <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a></li>
               <li class="hide-on-large-only search-input-wrapper"><a class="waves-effect waves-block waves-light search-button" href="javascript:void(0);"><i class="material-icons">search</i></a></li>
               <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">5</small></i></a></li>
-              <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="../images/2.jpg" alt="avatar"><i></i></span></a></li>
+              <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online">
+              <%try{
+              if(a1.getProfile_photo()==null){
+            	  %>
+            	  <img src="../images/avtar.jpg" alt="avatar">
+            	  <% 
+              }else{
+            	  %>
+            	  <img src="../admin-images/<%=a1.getProfile_photo() %>" alt="avatar">
+            	  <% 
+              }}catch(Exception e){
+            	  e.printStackTrace();
+              }
+              %>
+              <i></i></span></a></li>
 
             </ul>
             <!-- translation-button-->

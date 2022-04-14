@@ -46,6 +46,9 @@ if (a == null) {
 <%
 	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	%>
+	<%
+	String uname=(String)session.getAttribute("admin-uname");
+	%>
 <%@ include file="_sidebar.jsp"%>
 
  	<%try{
@@ -64,7 +67,30 @@ if (a == null) {
 			}
 			session.removeAttribute("admin-login-success");
 			%>
-
+			
+		 <div id="main">
+      <div class="row">
+        <div id="breadcrumbs-wrapper" data-image="../images/breadcrumb-bg.jpg">
+          <!-- Search for small screen-->
+          <div class="container">
+            <div class="row">
+              <div class="col s12 m6 l6">
+                <h5 class="breadcrumbs-title mt-0 mb-0"><span>Welcome , <%=uname %></span></h5>
+              </div>
+              <div class="col s12 m6 l6 right-align-md">
+                <ol class="breadcrumbs mb-0">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="#">Admin Dashboard</a>
+                  </li>
+                  
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
  
 
 
