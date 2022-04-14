@@ -79,9 +79,9 @@ if (a == null) {
               </div>
               <div class="col s12 m6 l6 right-align-md">
                 <ol class="breadcrumbs mb-0">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a>
+                  <li class="breadcrumb-item"><a href="admin-index.jsp">Home</a>
                   </li>
-                  <li class="breadcrumb-item"><a href="#">Admin Dashboard</a>
+                  <li class="breadcrumb-item"><a href="admin-index.jsp">Admin Dashboard</a>
                   </li>
                   
                 </ol>
