@@ -41,6 +41,20 @@ public class AdminDAO {
 		return adminObj;
 		
 	}
+	public int adminChangePassword(String current_pass,String new_pass,int id) {
+		con=DBConnection.getConnection();
+		int i=0;
+		try {
+			ps=con.prepareStatement("update erp_admin set password=? where id=?" );
+			ps.setString(1, new_pass);
+			ps.setInt(2, id);
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
 	
 	public int addNewAdmin(String username,String email,String contact,String password) {
 		con=DBConnection.getConnection();

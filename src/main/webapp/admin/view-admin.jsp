@@ -108,11 +108,11 @@ if (a == null) {
                 <%
                 if(rs.getString(7)==null){
                 	%>
-                	<span class="avatar-status avatar-online"><img src="../images/2.jpg" alt="avatar"></span>
+                	<span class="avatar-status avatar-online"><img src="../images/avtar.jpg" alt="avatar"></span>
                 	<% 
                 }else{
                 	%>
-                	 
+                	 <span class="avatar-status avatar-online"><img src="../admin-images/<%=rs.getString(7) %>" alt="avatar"></span>
                 	<% 
                 }
                 %>

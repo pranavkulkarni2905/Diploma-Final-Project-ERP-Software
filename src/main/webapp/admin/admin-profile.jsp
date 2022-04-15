@@ -21,7 +21,7 @@ if (a == null) {
     <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
-    <title>Admin View | ERP</title>
+    <title>Admin Profile | ERP</title>
     <link rel="apple-touch-icon" href="../app-assets/images/favicon/apple-touch-icon-152x152.png">
     <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/favicon/favicon-32x32.png">
     <link href="../icon.css?family=Material+Icons" rel="stylesheet">
@@ -56,24 +56,68 @@ if (a == null) {
           <div class="container">
             <div class="row">
               <div class="col s12 m6 l6">
-                <h5 class="breadcrumbs-title mt-0 mb-0"><span>Admin View</span></h5>
+                <h5 class="breadcrumbs-title mt-0 mb-0"><span>Admin Profile</span></h5>
               </div>
               <div class="col s12 m6 l6 right-align-md">
                 <ol class="breadcrumbs mb-0">
                   <li class="breadcrumb-item"><a href="index.html">Home</a>
                   </li>
-                  <li class="breadcrumb-item"><a href="#">Admin</a>
+                  <li class="breadcrumb-item"><a href="#">Admin Profile</a>
                   </li>
-                  <li class="breadcrumb-item active">Specific Admin View
-                  </li>
+                 
                 </ol>
               </div>
             </div>
           </div>
         </div>
+        
+        <%try{
+			Boolean msg1 = (Boolean) session.getAttribute("change-pass-success");
+			if (msg1==true) {
+			%>
+				<div class="card-alert card green">
+                <div class="card-content white-text">
+                   <p><i class="material-icons">check</i> Success : Password Has Been Changed Successfully.</p>
+                </div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("change-pass-success");
+			%>
+			
+			  <%try{
+			Boolean msg1 = (Boolean) session.getAttribute("change-pass-fail");
+			if (msg1==false) {
+			%>
+				<div class="card-alert card red lighten-5">
+                <div class="card-content red-text">
+                   <p><i class="material-icons">warning</i> Error : Something Went Wrong ,Try Again Later</p>
+                </div>
+                <button type="button" class="close red-text" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("change-pass-fail");
+			%>
+      
+        
     <% 
 try{
-int id=Integer.parseInt(request.getParameter("admin_id"));
+	ServletContext sct=request.getServletContext();
+int id=(Integer)sct.getAttribute("admin-id");
 AdminDAO ad=new AdminDAO();
 rs=ad.getSpecificAdminDataById(id);
 if(rs.next()){
@@ -101,34 +145,66 @@ if(rs.next()){
               %>
             
           <div class="media-body">
-            <h6 class="media-heading">&nbsp&nbsp
-              <span class="users-view-name">
-				 <%
-                if(rs.getString(2)==null){
-                	%>
-                	-
-                	<% 
-                }else{
-                	%>
-                	 <%=rs.getString(2) %>
-                	<% 
-                }
-                %>
-			</span>&nbsp&nbsp
+            <h6 class="media-heading">
+              
               <span class="grey-text">@</span>
               <span class="users-view-username grey-text"><%=rs.getString(3) %></span>
             </h6>
-            &nbsp&nbsp<span>ID:</span>
-            <span class="users-view-id"><%=rs.getInt(1) %></span>
+            
           </div>
         </div>
       </div>
       <div class="col s12 m5 quick-action-btns display-flex justify-content-end align-items-center pt-2">
-        
-       
+        <a href="app-email.html" class="btn-small btn-light-indigo"><i class="material-icons">mail_outline</i></a>
+       <a class="btn-small indigo btn modal-trigger" href="#modal1">Change Password</a>
+        <a href="admin-profile-edit.jsp" class="btn-small indigo">Edit</a>
       </div>
     </div>
   </div>
+  
+  <!-- Change password modal -->
+  <!-- Modal Trigger -->
+ 
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Change Password</h4>
+      
+      
+      <div id="inline-form" class="card card card-default scrollspy">
+        <div class="card-content">
+          <form action="../AdminChangePasswordServlet" method="post">
+          
+          <input type="hidden" name="id" value="<%=id %>" >
+            <div class="row">
+              <div class="input-field col m4 s6">
+               <i class="material-icons prefix">lock_outline</i>
+                <input id="icon_prefix1" name="current_pass" type="password" class="validate">
+                <label for="icon_prefix1">Current Password</label>
+              </div>
+              <div class="input-field col m4 s6">
+                <i class="material-icons prefix">lock_outline</i>
+                <input id="icon_password" name="new_pass" type="password" >
+                <label for="icon_password">New Password</label>
+              </div>
+              <div class="input-field col m4 s12">
+                <div class="input-field col s12">
+                  <button class="btn cyan waves-effect waves-light" type="submit" >
+                    <i class="material-icons left">lock_open</i> Reset Password</button>
+                </div>
+              </div>
+            </div>
+          </form>
+      
+      </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+  
+  
   <!-- users view media object ends -->
   <!-- users view card data start -->
   <div class="card">
@@ -207,6 +283,10 @@ if(rs.next()){
         <h6 class="mb-2 mt-2"><i class="material-icons">error_outline</i> Personal Info</h6>
           <table class="striped">
             <tbody>
+             <tr>
+                <td>Id :</td>
+                <td class="users-view-username"><%=rs.getInt(1)%></td>
+              </tr>
               <tr>
                 <td>Username:</td>
                 <td class="users-view-username"><%=rs.getString(3) %></td>
@@ -293,6 +373,8 @@ if(rs.next()){
     <script src="../app-assets/js/search.min.js"></script>
     <script src="../app-assets/js/custom/custom-script.min.js"></script>
     <script src="../app-assets/js/scripts/customizer.min.js"></script>
+    <script src="../app-assets/js/scripts/advance-ui-modals.min.js"></script>
+     <script src="../app-assets/js/scripts/ui-alerts.min.js"></script>
     <!-- END THEME  JS-->
     <!-- BEGIN PAGE LEVEL JS-->
    
