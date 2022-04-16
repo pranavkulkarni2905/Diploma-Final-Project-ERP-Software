@@ -62,8 +62,7 @@ if (a == null) {
                 <ol class="breadcrumbs mb-0">
                   <li class="breadcrumb-item"><a href="admin-index.jsp">Home</a>
                   </li>
-                  <li class="breadcrumb-item"><a href="view-admin.jsp">Admin</a>
-                  </li>
+                 
                   <li class="breadcrumb-item active">Admin List
                   </li>
                 </ol>
@@ -98,8 +97,8 @@ if (a == null) {
             </thead>
            <tbody>
             <%
-    AdminDAO ad=new AdminDAO();
-    ResultSet rs=ad.viewAllAdmin();
+    AdminDAO ad2=new AdminDAO();
+    ResultSet rs=ad2.viewAllAdmin();
         while(rs.next()){
         	%>
         	<tr>
@@ -135,7 +134,7 @@ if (a == null) {
                </td>
                 <td><%=rs.getString(5) %></td>
                 <td><%=rs.getString(4) %></td>
-               	<td>-</td>
+               	<td><%=rs.getString(8) %></td>
                	<td>
                 <a href="page-users-edit.html"><i class="material-icons">delete</i></a>
                </td>

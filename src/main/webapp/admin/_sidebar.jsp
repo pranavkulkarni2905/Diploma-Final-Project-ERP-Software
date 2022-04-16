@@ -1,3 +1,4 @@
+<%@page import="com.erp.DAO.AdminDAO"%>
 <%@page import="com.erp.model.Admin"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -29,9 +30,15 @@
   </head>
   <!-- END: Head-->
   <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-dark-menu" data-col="2-columns">
-<%
+<%! Admin a2=null; %>
+<%try{
+AdminDAO ad=new AdminDAO();
 ServletContext sc=request.getServletContext();
 Admin a1=(Admin)sc.getAttribute("admin-login-success-context");
+a2=ad.getSpecificAdminData(a1.getAdmin_id());
+}catch(Exception e){
+	e.printStackTrace();
+}
 %>
     <!-- BEGIN: Header-->
     <header class="page-topbar" id="header">
@@ -47,21 +54,21 @@ Admin a1=(Admin)sc.getAttribute("admin-login-success-context");
               <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a></li>
               <li class="hide-on-large-only search-input-wrapper"><a class="waves-effect waves-block waves-light search-button" href="javascript:void(0);"><i class="material-icons">search</i></a></li>
               <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">5</small></i></a></li>
-              <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online">
+              <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
               <%try{
-              if(a1.getProfile_photo()==null){
+              if(a2.getProfile_photo()==null){
             	  %>
-            	  <img src="../images/avtar.jpg" alt="avatar">
+            	 <span class="avatar-status avatar-online"> <img src="../images/avtar.jpg" alt="avatar"> </span>
             	  <% 
               }else{
             	  %>
-            	  <img src="../admin-images/<%=a1.getProfile_photo() %>" alt="avatar">
+            	  <span class="avatar-status avatar-online"><img src="../admin-images/<%=a2.getProfile_photo() %>" alt="avatar"> </span>
             	  <% 
               }}catch(Exception e){
             	  e.printStackTrace();
               }
               %>
-              <i></i></span></a></li>
+             </a></li>
 
             </ul>
             <!-- translation-button-->
@@ -125,7 +132,7 @@ Admin a1=(Admin)sc.getAttribute("admin-login-success-context");
     <!-- BEGIN: SideNav-->
     <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-dark sidenav-active-rounded">
       <div class="brand-sidebar">
-        <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="index.html"><img class="hide-on-med-and-down " src="../images/logo.jpg" style="width: 25px; height: 25px;" alt=" logo"><span class="logo-text hide-on-med-and-down">ERP</span></a><a class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a></h1>
+        <h1 class="logo-wrapper"><a class="brand-logo darken-1" href="admin-index.jsp"><img class="hide-on-med-and-down " src="../images/logo.jpg" style="width: 25px; height: 25px;" alt=" logo"><span class="logo-text hide-on-med-and-down">ERP</span></a><a class="navbar-toggler" href="#"><i class="material-icons">radio_button_checked</i></a></h1>
       </div>
       <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="accordion">
        

@@ -60,7 +60,7 @@ if (a == null) {
               </div>
               <div class="col s12 m6 l6 right-align-md">
                 <ol class="breadcrumbs mb-0">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a>
+                  <li class="breadcrumb-item"><a href="admin-index.jsp">Home</a>
                   </li>
                   <li class="breadcrumb-item"><a href="#">Admin Profile</a>
                   </li>
@@ -157,7 +157,7 @@ if(rs.next()){
       <div class="col s12 m5 quick-action-btns display-flex justify-content-end align-items-center pt-2">
         <a href="app-email.html" class="btn-small btn-light-indigo"><i class="material-icons">mail_outline</i></a>
        <a class="btn-small indigo btn modal-trigger" href="#modal1">Change Password</a>
-        <a href="admin-profile-edit.jsp" class="btn-small indigo">Edit</a>
+        <a href="admin-profile-edit.jsp?admin_id=<%= rs.getInt(1) %>" class="btn-small indigo">Edit</a>
       </div>
     </div>
   </div>

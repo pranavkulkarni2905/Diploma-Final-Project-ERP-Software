@@ -104,5 +104,54 @@ public class AdminDAO {
 		}
 		return rs;
 	}
+	public int uploadAdminProfile(String photo,int id) {
+		con=DBConnection.getConnection();
+		int i=0;
+		try {
+			ps=con.prepareStatement("update erp_admin set photo=? where id=?");
+			ps.setString(1, photo);
+			ps.setInt(2, id);
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+	public int editAdminProfile(int id,String uname,String name,String email,String phone) {
+		con=DBConnection.getConnection();
+		int i=0;
+		try {
+			ps=con.prepareStatement("update erp_admin set name=?,username=?,email=?,phone=? where id=?");
+			ps.setString(1, name);
+			ps.setString(2, uname);
+			ps.setString(3, email);
+			ps.setString(4, phone);
+			ps.setInt(5, id);
+			i = ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
+	public Admin getSpecificAdminData(int id) {
+		Admin a1=null;
+		ResultSet rs=null;
+		con=DBConnection.getConnection();
+		try {
+			ps=con.prepareStatement("select * from erp_admin where id=?");
+			ps.setInt(1, id);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				a1=new Admin(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return a1;
+	}
 
 }

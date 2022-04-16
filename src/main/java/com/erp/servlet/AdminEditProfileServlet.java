@@ -36,8 +36,18 @@ public class AdminEditProfileServlet extends HttpServlet {
 		String email=request.getParameter("email");
 		String phone=request.getParameter("phone");
 		String name=request.getParameter("name");
+		//System.out.println(username);
 		
 		AdminDAO ad=new AdminDAO();
+		int i=ad.editAdminProfile(id, username, name, email, phone);
+		if(i>0) {
+			sc.setAttribute("admin-profile-edit-success", true);
+			response.sendRedirect("admin/admin-profile-edit.jsp");
+		}else {
+			sc.setAttribute("admin-profile-edit-fail", false);
+			response.sendRedirect("admin/admin-profile-edit.jsp");
+		}
+		
 		
 		
 	}
