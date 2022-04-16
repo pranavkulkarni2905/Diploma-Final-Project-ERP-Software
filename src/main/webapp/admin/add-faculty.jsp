@@ -1,7 +1,7 @@
 <%@page import="com.erp.model.Admin"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%
+<%
 ServletContext sc1 = request.getServletContext();
 Admin a = (Admin) sc1.getAttribute("admin-login-success-context");
 if (a == null) {
@@ -76,19 +76,61 @@ response.setDateHeader ("Expires", 0);
             </div>
           </div>
         </div>
+        <%try{
+			Boolean msg1 = (Boolean) session.getAttribute("add-faculty-success");
+			if (msg1==true) {
+			%>
+				<div class="card-alert card green">
+                <div class="card-content white-text">
+                   <p><i class="material-icons">check</i> Success : New Faculty Has Been Added Successfully.</p>
+                </div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("add-faculty-success");
+			%>
+			
+			  <%try{
+			Boolean msg1 = (Boolean) session.getAttribute("add-faculty-fail");
+			if (msg1==false) {
+			%>
+				<div class="card-alert card red lighten-5">
+                <div class="card-content red-text">
+                   <p><i class="material-icons">warning</i> Error : Something Went Wrong ,Try Again Later</p>
+                </div>
+                <button type="button" class="close red-text" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("add-faculty-fail");
+			%>
+			
 <div class="row" style="margin-left: 250px">
-    <form class="col s12">
+    <form class="col s12"  action="../AddFacultyServlet" method="post">>
       <div class="row">
         <div class="input-field col s4">
-          <input id="first_name" type="text" class="validate">
+          <input id="first_name" type="text" name ="fname"class="validate">
           <label for="first_name">First Name</label>
       </div>
       <div class="input-field col s4">
-          <input id="middle_name" type="text" class="validate">
+          <input id="middle_name" type="text" name="mname"class="validate">
           <label for="middle_name">Middle Name</label>
         </div>
       <div class="input-field col s4">
-          <input id="last_name" type="text" class="validate">
+          <input id="last_name" type="text" name="lname"class="validate">
           <label for="last_name">Last Name</label>
         </div>
       </div>
@@ -96,22 +138,22 @@ response.setDateHeader ("Expires", 0);
       <div class="row">
        
         <div class="input-field col s4">
-          <input id="email" type="email" class="validate">
+          <input id="email" type="email" name="email"class="validate">
           <label for="email">Email</label>
         </div>
         
         <div class="input-field col s4">
-          <input id="education" type="text" class="validate">
+          <input id="education" type="text" name="education" class="validate">
           <label for="education">Education</label>
         </div>
         
         <div class="input-field col s4">
-          <input id="password" type="password" class="validate">
+          <input id="password" type="password" name="password" class="validate">
           <label for="password">Password</label>
         </div>
       </div>
       <br><br><br>
-      <center><a class="waves-effect waves-light  btn">ADD FACULTY</a></center>
+      <center><a class="waves-effect waves-light  btn" name="btn">ADD FACULTY</a></center>
     </form>
   </div>
  <!-- BEGIN VENDOR JS-->
