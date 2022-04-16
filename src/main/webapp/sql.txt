@@ -24,6 +24,5 @@ begin
 select erp_admin_seq.nextval into :new.id from dual;
 end;
 =================================================
-
-
+insert into erp_admin values(101,'Mansi Kaleshwarkar','Admin','mansikaleshwarkar60@gmail.com','7410124509','admin','photo.png','11.00 am','11.52 am');
 

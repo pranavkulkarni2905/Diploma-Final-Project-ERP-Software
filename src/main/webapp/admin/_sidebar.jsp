@@ -159,7 +159,7 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
         <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">Faculty</span></a>
           <div class="collapsible-body">
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="page-contact.html"><i class="material-icons">radio_button_unchecked</i><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
+              <li><a href="add-faculty.jsp"><i class="material-icons">radio_button_unchecked</i><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
               </li>
               <li><a href="page-blog-list.html"><i class="material-icons">radio_button_unchecked</i><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
               </li>
