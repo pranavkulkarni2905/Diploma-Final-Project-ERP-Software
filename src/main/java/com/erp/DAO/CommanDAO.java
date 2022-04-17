@@ -2,6 +2,7 @@ package com.erp.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CommanDAO {
@@ -29,8 +30,21 @@ public class CommanDAO {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-		
 		return i;
 		
+	}
+	
+	public ResultSet viewAllFaculty()
+	{
+		con = DBConnection.getConnection();
+		ResultSet rs = null;
+		try {
+			ps = con.prepareStatement("select * from erp_faculty");
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 	}
 }
