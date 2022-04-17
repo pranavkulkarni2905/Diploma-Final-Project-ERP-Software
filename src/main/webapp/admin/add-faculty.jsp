@@ -117,8 +117,8 @@ response.setDateHeader ("Expires", 0);
 			}
 			session.removeAttribute("add-faculty-fail");
 			%>
-			
-<div class="row" style="margin-left: 250px">
+<div class="card" style="margin-left:260px;margin-right:10px">
+<div class="row">
     <form class="col s12"  action="../AddFacultyServlet" method="post">>
       <div class="row">
         <div class="input-field col s4">
@@ -153,8 +153,10 @@ response.setDateHeader ("Expires", 0);
         </div>
       </div>
       <br><br><br>
-      <center><a class="waves-effect waves-light  btn" name="btn">ADD FACULTY</a></center>
+      <center><button type="submit" class="waves-effect waves-light btn" name="btn">ADD FACULTY</button></center>
+    <br><br>
     </form>
+  </div>
   </div>
  <!-- BEGIN VENDOR JS-->
     <script src="../app-assets/js/vendors.min.js"></script>

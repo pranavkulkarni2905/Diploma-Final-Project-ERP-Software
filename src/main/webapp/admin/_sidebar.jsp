@@ -161,7 +161,7 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
               <li><a href="add-faculty.jsp"><i class="material-icons">radio_button_unchecked</i><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
               </li>
-              <li><a href="page-blog-list.html"><i class="material-icons">radio_button_unchecked</i><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
+              <li><a href="view-faculty.jsp"><i class="material-icons">radio_button_unchecked</i><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
               </li>
               
             </ul>
