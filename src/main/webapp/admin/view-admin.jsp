@@ -117,7 +117,7 @@ if (a == null) {
                 %>
                 </td>
                 <td><%=rs.getInt(1) %></td>
-                <td><a href=""><%=rs.getString(3) %></a>
+                <td><a href="admin-view-page.jsp?admin_id=<%= rs.getInt(1) %>"><%=rs.getString(3) %></a>
                 </td>
                 <td>
                 <%

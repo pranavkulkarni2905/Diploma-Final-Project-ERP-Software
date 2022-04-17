@@ -1,12 +1,11 @@
 package com.erp.DAO;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CommanDAO {
-
-	
 
 	Connection con=null;
 	PreparedStatement ps=null;
