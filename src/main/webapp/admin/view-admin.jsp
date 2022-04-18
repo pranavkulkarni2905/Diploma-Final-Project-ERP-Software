@@ -97,8 +97,8 @@ if (a == null) {
             </thead>
            <tbody>
             <%
-    AdminDAO ad2=new AdminDAO();
-    ResultSet rs=ad2.viewAllAdmin();
+    AdminDAO ad3=new AdminDAO();
+    ResultSet rs=ad3.viewAllAdmin();
         while(rs.next()){
         	%>
         	<tr>

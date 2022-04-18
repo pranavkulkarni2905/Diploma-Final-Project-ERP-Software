@@ -13,22 +13,11 @@ photo varchar2(3000),
 register_time varchar2(2000),
 logout_time varchar2(2000)
 );
-create table erp_faculty(
-id number primary key,
-firstname varchar2(2000),
-middlename varchar2(2000),
-lastname varchar2(2000),
-email varchar2(2000),
-education varchar2(2000),
-password varchar2(200)
-);
+
 create sequence erp_admin_seq
 start with 1
 increment by 1;
 
-create sequence erp_faculty_seq
-start with 1
-increment by 1;
 
 create or replace trigger erp_admin_trig
 before insert on erp_admin
@@ -37,15 +26,36 @@ begin
 select erp_admin_seq.nextval into :new.id from dual;
 end;
 
+
+=================================================
+
+2.Faculty
+create table erp_faculty(
+id number primary key,
+username varchar2(2000),
+name varchar2(2000),
+email varchar2(2000),
+phone varchar2(2000),
+education varchar2(2000),
+dob varchar2(2000),
+gender varchar2(2000),
+photo varchar2(2000),
+address varchar2(4000),
+skills varchar2(3000),
+joining_date varchar2(2000),
+latest_activity varchar2(2000),
+about_desc varchar2(4000),
+verified varchar2(2000),
+password varchar2(200)
+);
+create sequence erp_faculty_seq
+start with 1
+increment by 1;
+
 create or replace trigger erp_faculty_trig
 before insert on erp_faculty
 for each row
 begin
 select erp_faculty_seq.nextval into :new.id from dual;
 end;
-=================================================
-insert into erp_admin values(101,'Mansi Kaleshwarkar','Admin','mansikaleshwarkar60@gmail.com','7410124509','admin','photo.png','11.00 am','11.52 am');
-insert into erp_faculty values(12,'Mansi Kaleshwarkar','Mansi123','mansikaleshwarkar60@gmail.com','B.TECH','fac');
-
-
-
+=======================================================

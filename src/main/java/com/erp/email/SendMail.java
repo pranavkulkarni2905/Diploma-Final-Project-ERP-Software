@@ -56,9 +56,9 @@ public class SendMail {
 
 		// Sender's email ID and password needs to be mentioned
 
-		final String from = "exam.webportal12@gmail.com";
+		final String from = "erp.system1010@gmail.com";
 
-		final String pass = "examportal@12";
+		final String pass = "Erp@2022";
 
 		// Defining the gmail host
 

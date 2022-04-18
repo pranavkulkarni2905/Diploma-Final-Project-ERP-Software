@@ -11,8 +11,8 @@ public class sendHtmlMail
   
       String host="smtp.gmail.com";//change accordingly  
      // String to="pranavkulkarni1110@gmail.com";//change accordingly  
-      final String user="exam.webportal12@gmail.com";//change accordingly  
-      final String password="examportal@12";//change accordingly  
+      final String user="erp.system1010@gmail.com";//change accordingly  
+      final String password="Erp@2022";//change accordingly  
   
       Properties props = System.getProperties();  
       props.setProperty("mail.smtp.host",host ); 
