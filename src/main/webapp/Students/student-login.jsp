@@ -4,12 +4,30 @@
 <html>
 <title>Student Login | ERP</title>
 <head>
+<SCRIPT type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+</SCRIPT>
+<%
+
+response.setHeader("Cache-Control","no-cache");
+response.setHeader("Cache-Control","no-store");
+response.setHeader("Pragma","no-cache");
+response.setDateHeader ("Expires", 0);
+    if(session.getAttribute("token")==null){
+    //response.sendRedirect(request.getContextPath() + "/LogOut.jsp");
+
+}
+    
+%>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <!--=======Font Open Sans======-->
   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <!--StyleSheet-->
   <link rel="stylesheet" href="css/style.css">
+  <link href="../icon.css?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../app-assets/vendors/vendors.min.css">
   <style>
     * {
       margin: 0;
@@ -150,20 +168,95 @@
       color: #1383ea;
       text-decoration: none;
     }
+    .msgFail{
+    	color : darkred;
+    	background-color: pink;
+    	border:2px solid red;
+    }
+    .msgFail button
+    {
+    	color : darkred;
+    	background-color: pink;
+    	margin-left:400px;
+    }
+    
+
   </style>
 </head>
 
 <body>
+
   <div class="forms">
     <ul class="tab-group">
       <li class="tab active"><a href="#login">Log In</a></li>
       <li class="tab"><a href="#signup">Login With OTP</a></li>
     </ul>
-    <form action="#" id="login">
+    <form action="../StudentLoginServlet" id="login" method="post">
       <h1>Login with Credentials</h1>
       <div class="input-field">
+      <%try{
+			Boolean msg1 = (Boolean) session.getAttribute("student-login-fail");
+			if (msg1==false) {
+			%>
+				<div class="msgFail">
+                
+                   <i class="material-icons">error</i> Sorry : Invalid Credentials!
+                <button type="button" class="close red-text" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("student-login-fail");
+			%>
+				 
+				 <%try{
+			Boolean msg1 = (Boolean) session.getAttribute("student-login-success");
+			if (msg1==true) {
+			%>
+				<div class="card-alert card green">
+                <div class="card-content white-text">
+                   <p><i class="material-icons">check</i> Congratulations : Login Succeed</p>
+                </div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("student-login-success");
+			%>
+			 <%try{
+			Boolean msg1 = (Boolean) session.getAttribute("student-logout-msg");
+			if (msg1==true) {
+		
+				%>
+				<div class="card-alert card green">
+                <div class="card-content white-text">
+                   <p><i class="material-icons">check</i> Success: You Have Been Successfully Logged Out.</p>
+                </div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("student-logout-msg");
+			%>
         <label for="email">Email</label>
-        <input type="email" name="email" required="email" />
+        <input type="email" name="uname" required="required" />
         <label for="password">Password</label>
         <input type="password" name="password" required />
         <input type="submit" value="Login" class="button" />
@@ -239,6 +332,19 @@
       }
     });
   </script>
+  <!-- BEGIN VENDOR JS-->
+    <script src="../app-assets/js/vendors.min.js"></script>
+    <!-- BEGIN VENDOR JS-->
+    <!-- BEGIN PAGE VENDOR JS-->
+    <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN THEME  JS-->
+    <script src="../app-assets/js/plugins.min.js"></script>
+    <script src="../app-assets/js/search.min.js"></script>
+    <script src="../app-assets/js/custom/custom-script.min.js"></script>
+    <script src="../app-assets/js/scripts/ui-alerts.min.js"></script>
+    <!-- END THEME  JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <!-- END PAGE LEVEL JS-->
 </body>
 
 </html>
