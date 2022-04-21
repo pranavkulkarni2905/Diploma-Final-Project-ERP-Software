@@ -20,7 +20,7 @@ public class FacultyDAO {
 			ps.setString(2, pass);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()) {
-				f=new Faculty(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(7), rs.getString(6), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(14),rs.getString(15));
+				f=new Faculty(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(5), rs.getString(7), rs.getString(6), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(14),rs.getString(15),rs.getString(16));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

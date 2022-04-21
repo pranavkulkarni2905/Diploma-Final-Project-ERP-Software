@@ -14,6 +14,7 @@ public class Faculty {
 	private String skills;
 	private String faculty_password;
 	private String uname;
+	private String verified;
     public Faculty()
     {
     	
@@ -21,7 +22,7 @@ public class Faculty {
 	}
 	public Faculty(int faculty_id, String faculty_name, String faculty_email, String faculty_education,
 			 String gender, String dob, String photo, String address, String skills,
-			String faculty_password,String uname) {
+			String faculty_password,String uname,String verified) {
 		super();
 		this.faculty_id = faculty_id;
 		this.faculty_name = faculty_name;
@@ -35,6 +36,7 @@ public class Faculty {
 		this.skills = skills;
 		this.faculty_password = faculty_password;
 		this.uname=uname;
+		this.setVerified(verified);
 	}
 	public int getFaculty_id() {
 		return faculty_id;
@@ -102,6 +104,12 @@ public class Faculty {
 	}
 	public void setUname(String uname) {
 		this.uname = uname;
+	}
+	public String getVerified() {
+		return verified;
+	}
+	public void setVerified(String verified) {
+		this.verified = verified;
 	}
     
 }
