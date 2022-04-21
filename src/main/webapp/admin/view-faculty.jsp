@@ -116,7 +116,14 @@ if (a == null) {
 												<%
     					CommanDAO cd=new CommanDAO();
    						ResultSet rs= cd.viewAllFaculty();
-        				while(rs.next()){
+						if(!rs.next()){
+							%>
+							<center><img src="../images/no-data.webp" width="400px" height="400px"></center>
+							<%
+						}else{
+							
+						
+        				do{
         					%>
 												<tr>
 													<td></td>
@@ -165,7 +172,8 @@ if (a == null) {
 													<td><a href=""><i class="material-icons">remove_red_eye</i></a></td>
 												</tr>
 												<% 
-        }
+        }while(rs.next());
+						}
     %>
 											
 										</table>

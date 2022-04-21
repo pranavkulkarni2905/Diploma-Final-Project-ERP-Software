@@ -6,33 +6,35 @@ public class Faculty {
 	private String faculty_name;
 	private String faculty_email;
 	private String faculty_education;
-	private String education;
+	
 	private String gender;
 	private String dob;
 	private String photo;
 	private String address;
 	private String skills;
 	private String faculty_password;
+	private String uname;
     public Faculty()
     {
     	
 		
 	}
 	public Faculty(int faculty_id, String faculty_name, String faculty_email, String faculty_education,
-			String education, String gender, String dob, String photo, String address, String skills,
-			String faculty_password) {
+			 String gender, String dob, String photo, String address, String skills,
+			String faculty_password,String uname) {
 		super();
 		this.faculty_id = faculty_id;
 		this.faculty_name = faculty_name;
 		this.faculty_email = faculty_email;
 		this.faculty_education = faculty_education;
-		this.education = education;
+	
 		this.gender = gender;
 		this.dob = dob;
 		this.photo = photo;
 		this.address = address;
 		this.skills = skills;
 		this.faculty_password = faculty_password;
+		this.uname=uname;
 	}
 	public int getFaculty_id() {
 		return faculty_id;
@@ -58,12 +60,7 @@ public class Faculty {
 	public void setFaculty_education(String faculty_education) {
 		this.faculty_education = faculty_education;
 	}
-	public String getEducation() {
-		return education;
-	}
-	public void setEducation(String education) {
-		this.education = education;
-	}
+	
 	public String getGender() {
 		return gender;
 	}
@@ -99,6 +96,12 @@ public class Faculty {
 	}
 	public void setFaculty_password(String faculty_password) {
 		this.faculty_password = faculty_password;
+	}
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
     
 }

@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class CommanDAO {
 
@@ -12,15 +14,18 @@ public class CommanDAO {
 	PreparedStatement ps=null;
 	public int addFaculty(String name,String email,String phone,String gender,String password){
 		int i=0;
+		Timestamp date=new Timestamp(new Date().getTime());
 		con = DBConnection.getConnection();
 			try {
-				ps=con.prepareStatement("insert into erp_faculty (name,email,phone,gender,password,verified) values(?,?,?,?,?,?)");
+				ps=con.prepareStatement("insert into erp_faculty (name,email,phone,gender,password,verified,joining_date,username) values(?,?,?,?,?,?,?,?)");
 				ps.setString(1,name);
 				ps.setString(2, email);
 				ps.setString(3,phone);
 				ps.setString(4,gender);
 				ps.setString(5, password);
 				ps.setString(6, "No");
+				ps.setTimestamp(7, date);
+				ps.setString(8, email);
 				i = ps.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
