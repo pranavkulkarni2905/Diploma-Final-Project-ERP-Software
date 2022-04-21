@@ -13,7 +13,7 @@ public class DBConnection {
 			//connection to data Base
 
 
-			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","12345678");
+			con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","sampada04");
 
 
 		} catch (ClassNotFoundException e) {

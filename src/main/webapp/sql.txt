@@ -59,3 +59,32 @@ begin
 select erp_faculty_seq.nextval into :new.id from dual;
 end;
 =======================================================
+3. Student
+
+create table erp_student
+(
+  id number primary key,
+  username varchar2(2000),
+  name varchar2(2000),
+  email varchar2(2000),
+  phone varchar2(2000),
+  dob varchar2(2000),
+  gender varchar2(2000),
+  photo varchar2(2000),
+  div varchar2(200),
+  address varchar2(4000),
+  latest_activity varchar2(4000),
+  verified varchar2(2000),
+  password varchar2(200)
+);
+
+create sequence erp_student_seq
+start with 1
+increment by 1;
+
+create or replace trigger erp_student_trig
+before insert on erp_student
+for each row
+begin
+select erp_student_seq.nextval into :new.id from dual;
+end;
