@@ -30,16 +30,6 @@
   </head>
   <!-- END: Head-->
   <body class="vertical-layout page-header-light vertical-menu-collapsible vertical-dark-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-dark-menu" data-col="2-columns">
-<%! Admin a2=null; %>
-<%try{
-AdminDAO ad=new AdminDAO();
-ServletContext sc=request.getServletContext();
-Admin a1=(Admin)sc.getAttribute("admin-login-success-context");
-a2=ad.getSpecificAdminData(a1.getAdmin_id());
-}catch(Exception e){
-	e.printStackTrace();
-}
-%>
     <!-- BEGIN: Header-->
     <header class="page-topbar" id="header">
       <div class="navbar navbar-fixed"> 
@@ -55,19 +45,7 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
               <li class="hide-on-large-only search-input-wrapper"><a class="waves-effect waves-block waves-light search-button" href="javascript:void(0);"><i class="material-icons">search</i></a></li>
               <li><a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown"><i class="material-icons">notifications_none<small class="notification-badge">5</small></i></a></li>
               <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown">
-              <%try{
-              if(a2.getProfile_photo()==null){
-            	  %>
-            	 <span class="avatar-status avatar-online"> <img src="../images/avtar.jpg" alt="avatar"> </span>
-            	  <% 
-              }else{
-            	  %>
-            	  <span class="avatar-status avatar-online"><img src="../admin-images/<%=a2.getProfile_photo() %>" alt="avatar"> </span>
-            	  <% 
-              }}catch(Exception e){
-            	  e.printStackTrace();
-              }
-              %>
+             
              </a></li>
 
             </ul>
@@ -138,35 +116,7 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
        
         
        
-        <li class="navigation-header"><a class="navigation-header-text">Admin Section</a><i class="navigation-header-icon material-icons">more_horiz</i>
-        </li>
         
-        <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">Admin</span></a>
-          <div class="collapsible-body">
-            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="add-admin.jsp"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
-              </li>
-              <li><a href="view-admin.jsp"><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
-              </li>
-              
-            </ul>
-          </div>
-        </li>
-        
-        <li class="navigation-header"><a class="navigation-header-text">Faculty Section</a><i class="navigation-header-icon material-icons">more_horiz</i>
-        </li>
-        
-        <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">Faculty</span></a>
-          <div class="collapsible-body">
-            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="add-faculty.jsp"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
-              </li>
-              <li><a href="view-faculty.jsp"><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
-              </li>
-              
-            </ul>
-          </div>
-        </li>
          <li class="navigation-header"><a class="navigation-header-text">Student Section</a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>
          <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">Student</span></a>
