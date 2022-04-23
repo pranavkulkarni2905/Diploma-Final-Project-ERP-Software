@@ -28,5 +28,25 @@ public class StudentDAO {
 		}
 		return s;
 	}
+	
+	public int addStudent(String name,String email,String phone,String div,String dept,String gender)
+	{
+		int i=0;
+		con = DBConnection.getConnection();
+		try {
+			ps=con.prepareStatement("insert into erp_student(name,email,phone,div,dept,gender) values(?,?,?,?,?,?)");
+			ps.setString(1,name);
+			ps.setString(2, email);
+			ps.setString(3, phone);
+			ps.setString(4, div);
+			ps.setString(5, dept);
+			ps.setString(6, gender);
+			i=ps.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
 
 }

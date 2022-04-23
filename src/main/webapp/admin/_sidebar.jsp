@@ -172,7 +172,7 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
          <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">Student</span></a>
           <div class="collapsible-body">
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="page-contact.html"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
+              <li><a href="addstudent.jsp"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
               </li>
               <li><a href="page-blog-list.html"><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
               </li>
@@ -181,7 +181,7 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
           </div>
         </li>
         </ul>
-      <div class="navigation-background"></div><a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+      <div class="navigation-background"></div><a class="ssidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
     </aside>
     <!-- END: SideNav-->
 
