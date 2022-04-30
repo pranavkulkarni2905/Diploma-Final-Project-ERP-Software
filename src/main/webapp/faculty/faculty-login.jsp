@@ -244,18 +244,19 @@ response.setDateHeader ("Expires", 0);
         <p class="text-p"> <a href="#">Forgot password?</a> </p>
       </div>
     </form>
-    <form action="#" id="signup">
+    <form action="../FacultyLoginServlet2" id="signup">
       <h1>Login With OTP</h1>
       <div class="input-field">
         <label for="email" id="lbl1">Mobile Number</label>
         <input type="number" id="mob" name="number" required="required" />
 
-        <input type="submit" id="send" onclick="TestsFunction()" value="Send Otp" disabled class="button" />
+        <input type="submit" id="send" class="button" />
+       
         <label for="email" id="lbl2" style="display: none;">Enter OTP <small>(6 Digits)</small></label>
         <input type="number" id="otp" name="otp" minlength="6" maxlength="6" style="display: none;"
-          onKeyPress="if(this.value.length==6) return false;" required="number" />
+          onKeyPress="if(this.value.length==6) return false;" required="required" />
 
-        <input type="submit" id="verify" value="Verify" class="button" style="display: none;" disabled />
+        <input type="submit" formaction="#" id="verify" value="Verify" class="button" style="display: none;" disabled />
       </div>
     </form>
   </div>
@@ -278,24 +279,6 @@ response.setDateHeader ("Expires", 0);
       document.getElementById("verify").disabled = false;
     }
 
-    function TestsFunction() {
-      var T = document.getElementById("otp");
-      var T1 = document.getElementById("verify");
-      var T2 = document.getElementById("lbl2");
-
-      var a = document.getElementById("lbl1");
-      var b = document.getElementById("mob");
-      var c = document.getElementById("send");
-
-      T.style.display = "block";  // <-- Set it to block
-      T1.style.display = "block";
-      T2.style.display = "block";
-
-      a.style.display = "none";
-      b.style.display = "none";
-      c.style.display = "none";
-    }
-
 
     $('#mob').click(function () {
       if ($('#send').is(':disabled')) {
@@ -314,5 +297,5 @@ response.setDateHeader ("Expires", 0);
     });
   </script>
 </body>
-
+<!-- onclick="TestsFunction()" value="Send Otp" disabled-->
 </html>
