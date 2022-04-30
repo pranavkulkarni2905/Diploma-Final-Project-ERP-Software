@@ -1,5 +1,7 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="com.erp.DAO.DepartmentDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%
 ServletContext sc1 = request.getServletContext();
 Admin a = (Admin) sc1.getAttribute("admin-login-success-context");
@@ -22,7 +24,7 @@ if (a == null) {
 <meta name="keywords"
 	content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
 <meta name="author" content="ThemeSelect">
-<title>Add STUDENT| ERP</title>
+<title>Add Student| ERP</title>
 <link rel="apple-touch-icon"
 	href="../app-assets/images/favicon/apple-touch-icon-152x152.png">
 <link rel="shortcut icon" type="image/x-icon"
@@ -71,7 +73,7 @@ if (a == null) {
 						<div class="col s12 m6 l6 right-align-md">
 							<ol class="breadcrumbs mb-0">
 								<li class="breadcrumb-item"><a href="admin-index.jsp">Home</a></li>
-								
+
 								<li class="breadcrumb-item active">Add Student</li>
 							</ol>
 						</div>
@@ -82,55 +84,57 @@ if (a == null) {
 			<div class="col s12">
 				<div class="container">
 					<div class="seaction">
-<%try{
-			Boolean msg1 = (Boolean) session.getAttribute("add-student-success");
-			if (msg1==true) {
-			%>
-	<div class="card-alert card green">
-		<div class="card-content white-text">
-			<p>
-				<i class="material-icons">check</i> Success : New Student Has Been
-				Added Successfully.
-			</p>
-		</div>
-		<button type="button" class="close white-text" data-dismiss="alert"
-			aria-label="Close">
-			<span aria-hidden="true">×</span>
-		</button>
-	</div>
-	<%
-		}
-       	
-			}catch(Exception e){
-				//e.printStackTrace();
-			}
-			session.removeAttribute("add-faculty-success");
-			%>
+						<%
+						try {
+							Boolean msg1 = (Boolean) session.getAttribute("add-student-success");
+							if (msg1 == true) {
+						%>
+						<div class="card-alert card green">
+							<div class="card-content white-text">
+								<p>
+									<i class="material-icons">check</i> Success : New Student Has
+									Been Added Successfully.
+								</p>
+							</div>
+							<button type="button" class="close white-text"
+								data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<%
+						}
 
-	<%try{
-			Boolean msg1 = (Boolean) session.getAttribute("add-studnet-fail");
-			if (msg1==false) {
-			%>
-	<div class="card-alert card red lighten-5">
-		<div class="card-content red-text">
-			<p>
-				<i class="material-icons">warning</i> Error : Something Went Wrong
-				,Try Again Later
-			</p>
-		</div>
-		<button type="button" class="close red-text" data-dismiss="alert"
-			aria-label="Close">
-			<span aria-hidden="true">×</span>
-		</button>
-	</div>
-	<%
-			}
-       	
-			}catch(Exception e){
-				//e.printStackTrace();
-			}
-			session.removeAttribute("add-faculty-fail");
-			%>
+						} catch (Exception e) {
+						//e.printStackTrace();
+						}
+						session.removeAttribute("add-student-success");
+						%>
+
+						<%
+						try {
+							Boolean msg1 = (Boolean) session.getAttribute("add-studnet-fail");
+							if (msg1 == false) {
+						%>
+						<div class="card-alert card red lighten-5">
+							<div class="card-content red-text">
+								<p>
+									<i class="material-icons">warning</i> Error : Something Went
+									Wrong ,Try Again Later
+								</p>
+							</div>
+							<button type="button" class="close red-text" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<%
+						}
+
+						} catch (Exception e) {
+						//e.printStackTrace();
+						}
+						session.removeAttribute("add-student-fail");
+						%>
 
 						<!-- Form with validation -->
 						<div class="col s12 m6 l6 mx-auto" style="width: 1269.2px">
@@ -158,30 +162,32 @@ if (a == null) {
 										<div class="row">
 											<div class="input-field col s12">
 												<i class="material-icons prefix">phone</i> <input
-													 type="number" name="phone" class="validate">
-												<label for="">Phone</label>
-											</div>
-										</div>
-										<div class="row">
-											<div class="input-field col s12">
-												<i class="material-icons prefix">Department</i> <input
-													 type="text" name="department" class="validate">
-												<label for="">Department</label>
-											</div>
-											
-										</div>
-										
-										<div class="row">
-											<div class="input-field col s12">
-												<i class="material-icons prefix">Division</i> <input
-													 type="text" name="div" class="validate">
-												<label for="">Division</label>
+													type="number" name="phone" class="validate"> <label
+													for="">Phone</label>
 											</div>
 										</div>
 										<div class="row">
 											<div class="input-field col  s12">
-											<i class="material-icons prefix">person</i>
-												<select name="gender">
+												<i class="material-icons prefix">domain</i> <select
+													name="dept">
+													<option value="" disabled="" selected="">Choose
+														Department</option>
+														<%DepartmentDAO dd=new DepartmentDAO();
+															ResultSet rs=dd.displayAll();
+															while(rs.next()){
+																%>
+																<option value=<%=rs.getString(3) %>><%=rs.getString(3) %></option>
+																<% 															}
+															%>
+												</select> <label>Select Department</label>
+											</div>
+										</div>
+
+										
+										<div class="row">
+											<div class="input-field col  s12">
+												<i class="material-icons prefix">person</i> <select
+													name="gender">
 													<option value="" disabled="" selected="">Choose
 														Gender</option>
 													<option value="Male">Male</option>
@@ -189,18 +195,18 @@ if (a == null) {
 													<option value="Other">Other</option>
 												</select> <label>Select Gender</label>
 											</div>
-											</div>
+										</div>
+										<div class="row">
+
 											<div class="row">
-												
-												<div class="row">
-													<div class="input-field col s12">
-														<button class="btn cyan waves-effect waves-light right"
-															type="submit" name="action">
-															Add Student<i class="material-icons right">send</i>
-														</button>
-													</div>
+												<div class="input-field col s12">
+													<button class="btn cyan waves-effect waves-light right"
+														type="submit" name="action">
+														Add Student<i class="material-icons right">send</i>
+													</button>
 												</div>
 											</div>
+										</div>
 									</form>
 								</div>
 

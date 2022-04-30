@@ -74,6 +74,10 @@ create table erp_student
   dept varchar2(200),
   gender varchar2(2000),
   address varchar2(4000),
+  father_name varchar2(2000),
+  mother_name varchar2(2000),
+  f_occupation varchar2(2000),
+  m_occupation varchar2(2000),
   latest_activity varchar2(4000),
   verified varchar2(2000),
   password varchar2(200)
@@ -85,6 +89,27 @@ increment by 1;
 
 create or replace trigger erp_student_trig
 before insert on erp_student
+for each row
+begin
+select erp_student_seq.nextval into :new.id from dual;
+end;
+----------------------------------------------
+4.Department
+create table erp_dept(
+id number primary key,
+code varchar2(1000),
+name varchar2(2000),
+intake varchar2(2000),
+semester varchar2(2000),
+dept_register_date varchar2(4000)
+);
+
+create sequence erp_dept_seq
+start with 1
+increment by 1;
+
+create or replace trigger erp_dept_trig
+before insert on erp_dept
 for each row
 begin
 select erp_student_seq.nextval into :new.id from dual;

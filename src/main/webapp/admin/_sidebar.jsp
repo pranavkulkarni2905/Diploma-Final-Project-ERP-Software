@@ -152,7 +152,19 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
             </ul>
           </div>
         </li>
-        
+         <li class="navigation-header"><a class="navigation-header-text">Department Section</a><i class="navigation-header-icon material-icons">more_horiz</i>
+        </li>
+         <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">domain</i><span class="menu-title" data-i18n="Pages">Department</span></a>
+          <div class="collapsible-body">
+            <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+              <li><a href="add-dept.jsp"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
+              </li>
+              <li><a href="page-blog-list.html"><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
+              </li>
+              
+            </ul>
+          </div>
+        </li>
         <li class="navigation-header"><a class="navigation-header-text">Faculty Section</a><i class="navigation-header-icon material-icons">more_horiz</i>
         </li>
         
@@ -172,7 +184,7 @@ a2=ad.getSpecificAdminData(a1.getAdmin_id());
          <li class="bold"><a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)"><i class="material-icons">person</i><span class="menu-title" data-i18n="Pages">Student</span></a>
           <div class="collapsible-body">
             <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-              <li><a href="addstudent.jsp"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
+              <li><a href="add-student.jsp"><i class="material-icons">add_box</i><span data-i18n="Contact">Add </span></a>
               </li>
               <li><a href="page-blog-list.html"><i class="material-icons">visibility</i><span data-i18n="Blog">View </span></a>
               </li>

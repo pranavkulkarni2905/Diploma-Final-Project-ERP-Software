@@ -13,6 +13,10 @@ public class Student {
 	private String div;
 	private String username;
 	private String student_password;
+	private String father_name;
+	private String mother_name;
+	private String admission_date;
+	private String latest_activity;
 	public Student(int student_id, String student_name, String student_email, String student_phone, String dob,
 			String gender, String photo, String address, String div, String username, String student_password) {
 		super();
@@ -94,6 +98,38 @@ public class Student {
 	}
 	public void setStudent_password(String student_password) {
 		this.student_password = student_password;
+	}
+
+	public String getFather_name() {
+		return father_name;
+	}
+
+	public void setFather_name(String father_name) {
+		this.father_name = father_name;
+	}
+
+	public String getMother_name() {
+		return mother_name;
+	}
+
+	public void setMother_name(String mother_name) {
+		this.mother_name = mother_name;
+	}
+
+	public String getAdmission_date() {
+		return admission_date;
+	}
+
+	public void setAdmission_date(String admission_date) {
+		this.admission_date = admission_date;
+	}
+
+	public String getLatest_activity() {
+		return latest_activity;
+	}
+
+	public void setLatest_activity(String latest_activity) {
+		this.latest_activity = latest_activity;
 	}
 
 }

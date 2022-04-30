@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import com.erp.model.Student;
 
@@ -29,24 +31,42 @@ public class StudentDAO {
 		return s;
 	}
 	
-	public int addStudent(String name,String email,String phone,String div,String dept,String gender)
+	public int addStudent(String name,String email,String phone,String dept,String gender,String password)
 	{
 		int i=0;
+		Timestamp date=new Timestamp(new Date().getTime());
 		con = DBConnection.getConnection();
 		try {
-			ps=con.prepareStatement("insert into erp_student(name,email,phone,div,dept,gender) values(?,?,?,?,?,?)");
+			ps=con.prepareStatement("insert into erp_student(name,email,phone,dept,gender,password,username,admission_date,verified) values(?,?,?,?,?,?,?,?,?)");
 			ps.setString(1,name);
 			ps.setString(2, email);
 			ps.setString(3, phone);
-			ps.setString(4, div);
-			ps.setString(5, dept);
-			ps.setString(6, gender);
+			ps.setString(4, dept);
+			ps.setString(5, gender);
+			ps.setString(6, password);
+			ps.setString(7, email);
+			ps.setTimestamp(8, date);
+			ps.setString(9, "No");
 			i=ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return i;
+	}
+	public ResultSet getStudentIdForVerify(String password,String email) {
+		con=DBConnection.getConnection();
+		ResultSet rs=null;
+		try {
+			ps=con.prepareStatement("select * from erp_student where password=? and email=?");
+			ps.setString(1, password);
+			ps.setString(2, email);
+			rs = ps.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
 	}
 
 }
