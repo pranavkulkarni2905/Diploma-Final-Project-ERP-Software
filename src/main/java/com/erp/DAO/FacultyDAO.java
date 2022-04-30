@@ -28,5 +28,22 @@ public class FacultyDAO {
 		}
 		return f;
 	}
+	public int checkPhone(long number)
+	{
+		int i = 0;
+		ResultSet rs = null;
+		con = DBConnection.getConnection();
+		try {
+			ps = con.prepareStatement("select phone from erp_faculty where phone=?");
+			ps.setLong(1, number);
+			rs = ps.executeQuery();
+			if(rs.next())
+				i = 1;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
+	}
 
 }
