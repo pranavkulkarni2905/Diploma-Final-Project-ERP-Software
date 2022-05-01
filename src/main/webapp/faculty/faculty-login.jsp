@@ -9,11 +9,19 @@
   <!--=======Font Open Sans======-->
   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <!--StyleSheet-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="sweetalert2.all.min.js"></script>
 <script src="sweetalert2.min.js"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
 <SCRIPT type="text/javascript">
     window.history.forward();
     function noBack() { window.history.forward(); }
@@ -170,11 +178,102 @@ response.setDateHeader ("Expires", 0);
       color: #1383ea;
       text-decoration: none;
     }
+    #snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
   </style>
 </head>
 
 <body>
+ 
+<%try{
+			Boolean msg1 = (Boolean) session.getAttribute("otp-sent-success");
+			if (msg1==true) {
+			%>
+				<div id="snackbar">OTP Has Been Sent to your mobile no successfuly..</div>
+				<script>
 
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
+</script>
+	
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("otp-sent-success");
+			%>
+			
+			<%try{
+			Boolean msg1 = (Boolean) session.getAttribute("otp-sent-success");
+			if (msg1==true) {
+			%>
+				<script type="text/javascript">
+
+				Swal.fire({
+				    title: "Enter 6 Digit OTP",
+				    text: "Enter OTP",
+				    input: 'number',
+				    
+				    showCancelButton: true        
+				}).then((result) => {
+				    if (result.value) {
+				    	window.location = "../FacultyOTPVerifyServlet?otp="+result.value;
+				    }
+				}); 
+
+				</script>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("otp-sent-success");
+			%>
+			
 <%try{
 			Boolean msg1 = (Boolean) session.getAttribute("faculty-login-fail");
 			if (msg1==false) {
@@ -212,13 +311,13 @@ response.setDateHeader ("Expires", 0);
 			%>
 			
 			<%try{
-			Boolean msg1 = (Boolean) session.getAttribute("faculty-login-success");
-			if (msg1==true) {
+			Boolean msg1 = (Boolean) session.getAttribute("invalid-phone");
+			if (msg1==false) {
 			%>
 				<script type="text/javascript">
 					Swal.fire('Error.!!  ',
-				'Successfull'
-					, 'success')
+				'Entered Number Is Invalid'
+					, 'warning')
 				</script>
 			<%
 			}
@@ -226,8 +325,26 @@ response.setDateHeader ("Expires", 0);
 			}catch(Exception e){
 				//e.printStackTrace();
 			}
-			session.removeAttribute("faculty-login-success");
+			session.removeAttribute("invalid-phone");
 			%>
+			<%try{
+			Boolean msg1 = (Boolean) session.getAttribute("not-exist-phone");
+			if (msg1==false) {
+			%>
+				<script type="text/javascript">
+					Swal.fire('Error.!!  ',
+				'Entered Number does not exist..'
+					, 'warning')
+				</script>
+			<%
+			}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("not-exist-phone");
+			%>
+			
   <div class="forms">
     <ul class="tab-group">
       <li class="tab active"><a href="#login">Log In</a></li>
@@ -248,15 +365,12 @@ response.setDateHeader ("Expires", 0);
       <h1>Login With OTP</h1>
       <div class="input-field">
         <label for="email" id="lbl1">Mobile Number</label>
-        <input type="number" id="mob" name="number" required="required" />
+        <input type="number" maxlength="10" min="10" id="mob" name="phone" required="required" />
 
         <input type="submit" id="send" class="button" />
        
-        <label for="email" id="lbl2" style="display: none;">Enter OTP <small>(6 Digits)</small></label>
-        <input type="number" id="otp" name="otp" minlength="6" maxlength="6" style="display: none;"
-          onKeyPress="if(this.value.length==6) return false;" required="required" />
-
-        <input type="submit" formaction="#" id="verify" value="Verify" class="button" style="display: none;" disabled />
+        
+       
       </div>
     </form>
   </div>
@@ -280,21 +394,7 @@ response.setDateHeader ("Expires", 0);
     }
 
 
-    $('#mob').click(function () {
-      if ($('#send').is(':disabled')) {
-        $('#send').removeAttr('disabled');
-      } else {
-        $('#send').attr('disabled', 'disabled');
-      }
-    });
-
-    $('#otp').click(function () {
-      if ($('#verify').is(':disabled')) {
-        $('#verify').removeAttr('disabled');
-      } else {
-        $('#verify').attr('disabled', 'disabled');
-      }
-    });
+   
   </script>
 </body>
 <!-- onclick="TestsFunction()" value="Send Otp" disabled-->
