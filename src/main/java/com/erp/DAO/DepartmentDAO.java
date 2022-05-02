@@ -43,4 +43,21 @@ public class DepartmentDAO {
 		}
 		return rs;
 	}
+	public boolean deleteDept(int id)
+	{
+		int i = 0;
+		boolean b = false;
+		try {
+			con = DBConnection.getConnection();
+			ps = con.prepareStatement("delete from erp_dept where id=?");
+			ps.setInt(1, id);
+			i = ps.executeUpdate();
+			if(i>0)
+				b = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return b;
+	}
 }

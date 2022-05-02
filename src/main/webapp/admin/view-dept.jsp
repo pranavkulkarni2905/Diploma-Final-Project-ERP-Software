@@ -1,7 +1,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.erp.DAO.DepartmentDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%
 ServletContext sc1 = request.getServletContext();
 Admin a = (Admin) sc1.getAttribute("admin-login-success-context");
@@ -62,6 +62,7 @@ if (a == null) {
 	<%@ include file="_sidebar.jsp"%>
 
 	<!-- BEGIN: Page Main-->
+
 	<div id="main">
 		<div class="row">
 			<div id="breadcrumbs-wrapper"
@@ -78,21 +79,60 @@ if (a == null) {
 							<ol class="breadcrumbs mb-0">
 								<li class="breadcrumb-item"><a href="admin-index.jsp">Home</a>
 								</li>
-<li class="breadcrumb-item"><a href="add-dept.jsp">Add Department</a>
-								</li>
+								<li class="breadcrumb-item"><a href="add-dept.jsp">Add
+										Department</a></li>
 								<li class="breadcrumb-item active">View Department</li>
 							</ol>
 						</div>
 					</div>
 				</div>
 			</div>
+			<%try{
+			Boolean msg1 = (Boolean) session.getAttribute("dept-deleted");
+			if (msg1==true) {
+			%>
+							<div class="card-alert card green">
+								<div class="card-content white-text">
+									<p>
+										<i class="material-icons">check</i> Success : Department Has
+										Been Deleted successfully.
+									</p>
+								</div>
+								<button type="button" class="close white-text"
+									data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">×</span>
+								</button>
+							</div>
+							<%
+			}
+			if (msg1==false) {
+				%>
+								<div class="card-alert card red lighten-5">
+									<div class="card-content white-text">
+										<p>
+											<i class="material-icons">check</i> Error: Something went wrong..Try again Later !
+										</p>
+									</div>
+									<button type="button" class="close white-text"
+										data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<%
+				}
+       	
+			}catch(Exception e){
+				//e.printStackTrace();
+			}
+			session.removeAttribute("dept-deleted");
+			%>
 			<div class="col s12">
 				<div class="container">
 					<!-- users list start -->
 					<section class="users-list-wrapper section">
 
 						<div class="users-list-table">
-							<div class="card">
+							<div class="card card card-default scrollspy">
 								<div class="card-content">
 									<!-- datatable start -->
 									<div class="responsive-table">
@@ -100,7 +140,7 @@ if (a == null) {
 											<thead>
 												<tr>
 													<th></th>
-													
+
 													<th>Id</th>
 													<th>Dept Code</th>
 													<th>Dept Name</th>
@@ -108,43 +148,94 @@ if (a == null) {
 													<th>Semester</th>
 													<th>Dept Establishment Date</th>
 													<th>Action</th>
-													
+
 												</tr>
 											</thead>
 											<tbody>
 												<%
-    					DepartmentDAO dd=new DepartmentDAO();
-   						ResultSet rs= dd.displayAll();
-						if(!rs.next()){
-							%>
-							<center><img src="../images/no-data.webp" width="400px" height="400px"></center>
-							<%
-						}else{
-							
-						
-        				do{
-        					%>
+												DepartmentDAO dd = new DepartmentDAO();
+												ResultSet rs = dd.displayAll();
+												if (!rs.next()) {
+												%>
+												<center>
+													<img src="../images/no-data.webp" width="400px"
+														height="400px">
+												</center>
+												<%
+												} else {
+
+												do {
+												%>
 												<tr>
 													<td></td>
 
-													
-													<td><%=rs.getInt(1) %></td>
-													
-													<td><%=rs.getString(2) %></td>
-													<td><%=rs.getString(3) %></td>
-													<td><%=rs.getString(4) %></td>
-													<td><%=rs.getString(5) %></td>
-													<td><%=rs.getString(6) %></td>
-													<td><a href=""><i class="material-icons">create</i></a>&nbsp&nbsp<a href=""><i class="material-icons">delete</i></a>
-													</td>
+
+													<td><%=rs.getInt(1)%></td>
+
+													<td><%=rs.getString(2)%></td>
+													<td><%=rs.getString(3)%></td>
+													<td><%=rs.getString(4)%></td>
+													<td><%=rs.getString(5)%></td>
+													<td><%=rs.getString(6)%></td>
+													<td><a class="modal-trigger" href="#modal2"><i class="material-icons">create</i></a>&nbsp&nbsp
+													<a href="../DeleteDeptServlet?deptid=<%=rs.getInt(1) %>"><i class="material-icons">delete</i></a></td>
 													<td><a href=""><i class="material-icons">remove_red_eye</i></a></td>
-												</tr>
-												<% 
-        }while(rs.next());
-						}
-    %>
+												
 											
-										</table>
+											
+										
+	<div id="modal2" class="modal">
+		<div class="modal-content">
+			<h4>Edit Department</h4>
+				<div class="card-content">
+					<form action="../EditDepartmentServlet" method="post">
+
+						<input type="hidden" name="id" value="<%=rs.getInt(1)%>">
+						
+							<div class="input-field col m8 s6">
+								<i class="material-icons prefix">domain</i> <input
+									id="icon_prefix1" name="dept_code" type="text"
+									class="validate" value="<%=rs.getString(2)%>"> <label for="icon_prefix1">Department
+									code</label>
+							</div>
+							<div class="input-field col m8 s6">
+								<i class="material-icons prefix">label</i> <input
+									id="icon_password" name="dept_name" type="text" value="<%=rs.getString(3)%>"> <label
+									for="icon_password">Department name</label>
+							</div>
+							<div class="input-field col m8 s6">
+								<i class="material-icons prefix">layers</i> <input
+									id="icon_password" name="semesters" type="number" value="<%=rs.getString(4)%>"> <label
+									>Total Intakes</label>
+							</div>
+							<div class="input-field col m8 s6">
+								<i class="material-icons prefix">layers</i> <input
+									id="icon_password" name="intake" type="number" value="<%=rs.getString(5)%>"> <label
+								>Total Semesters</label>
+							</div>
+							<div class="input-field col m4 s12">
+								<div class="input-field col s12">
+									<button class="btn cyan waves-effect waves-light" type="submit">
+										<i class="material-icons left">edit</i> Save changes
+									</button>
+								</div>
+							</div>
+					</form>
+
+				</div>
+			</div>
+		<div class="modal-footer">
+			<a href="#!"
+				class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+		</div>
+	</div>
+	</tr>
+	<%
+												} while (rs.next());
+												
+												}
+												%>
+												</table>
 									</div>
 									<!-- datatable ends -->
 								</div>
@@ -154,8 +245,7 @@ if (a == null) {
 
 
 				</div>
-				<div class="content-overlay"></div>
-			</div>
+				
 		</div>
 	</div>
 	<!-- END: Page Main-->
@@ -175,6 +265,8 @@ if (a == null) {
 	<script src="../app-assets/js/search.min.js"></script>
 	<script src="../app-assets/js/custom/custom-script.min.js"></script>
 	<script src="../app-assets/js/scripts/customizer.min.js"></script>
+	<script src="../app-assets/js/scripts/advance-ui-modals.min.js"></script>
+	<script src="../app-assets/js/scripts/ui-alerts.min.js"></script>
 	<!-- END THEME  JS-->
 	<!-- BEGIN PAGE LEVEL JS-->
 	<script src="../app-assets/js/scripts/page-users.min.js"></script>
